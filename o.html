@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>University Hall Ticket Generator</title>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+<style>
+body {
+    font-family: Arial, Helvetica;
+    background: #e9edf3;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 420px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px #0003;
+}
+
+.container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #777;
+    border-radius: 6px;
+}
+
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border: none;
+    background: #002147;
+    color: pink;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #003a88;
+}
+
+.ticket {
+    width: 820px;
+    margin: 20px auto;
+    background: white;
+    padding: 25px;
+    border: 5px solid black;
+    page-break-after: always;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 6px;
+    font-size: 14px;
+}
+
+@media print {
+    .container { display: none; }
+}
+
+.photo-box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    object-fit: cover;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h3 style="text-align:center;">UNIVERSITY HALL TICKET GENERATOR</h3>
+
+    <input id="collegeName" placeholder="Enter College Name">
+
+    <input id="name" placeholder="Student Name">
+    <input id="dob" placeholder="Date of Birth (DD/MM/YYYY)">
+    <input id="gender" placeholder="Gender (Male/Female)">
+    <input id="roll" placeholder="Roll Number">
+    <input id="course" placeholder="Course (BCA, BCom, etc.)">
+    <input type="file" id="photo" accept="image/*">
+
+    <button onclick="saveStudent()">Save Student</button>
+    <button onclick="generateTickets()">Generate All Hall Tickets</button>
+    <button onclick="window.print()">PRINT</button>
+</div>
+
+<div id="output"></div>
+
+<script>
+let students = [];
+let photos = {};
+let collegeCode = "1727"; // fixed
+
+document.getElementById("photo").addEventListener("change", function(e){
+    let f = e.target.files[0];
+    let reader = new FileReader();
+    reader.onload = ev => photos["temp"] = ev.target.result;
+    reader.readAsDataURL(f);
+});
+
+function saveStudent(){
+    let stu = {
+        name: document.getElementById("name").value,
+        dob: document.getElementById("dob").value,
+        roll: document.getElementById("roll").value,
+        gender: document.getElementById("gender").value,
+        course: document.getElementById("course").value,
+        photo: photos["temp"] || ""
+    };
+
+    students.push(stu);
+
+    alert("Student Saved! Enter next student.");
+
+    document.getElementById("name").value = "";
+    document.getElementById("dob").value = "";
+    document.getElementById("gender").value = "";
+    document.getElementById("roll").value = "";
+    document.getElementById("course").value = "";
+    document.getElementById("photo").value = "";
+}
+
+function reg(i){
+    return "21" + String(500000 + i);
+}
+
+function generateTickets(){
+    let CN = document.getElementById("collegeName").value;
+    let out = "";
+
+    students.forEach((stu,i)=>{
+        let r = reg(i);
+
+        out += `
+        <div class="ticket">
+
+            <table>
+                <tr>
+                    <td style="border:none;">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/2/21/University_of_Madras_Logo.png" width="90">
+                    </td>
+                    <td style="border:none;text-align:center;">
+                        <h2>UNIVERSITY OF MADRAS</h2>
+                        <h3>NOVEMBER - 2025</h3>
+                        <h3><b>HALL TICKET</b></h3>
+                    </td>
+                    <td style="border:none;text-align:right;">
+                        <img src="${stu.photo}" class="photo-box">
+                    </td>
+                </tr>
+            </table>
+
+            <table style="margin-top:10px;">
+                <tr>
+                    <th>COLLEGE NAME</th>
+                    <th>CENTRE CODE</th>
+                    <th>COURSE</th>
+                </tr>
+                <tr>
+                    <td>${CN}</td>
+                    <td>${collegeCode}</td>
+                    <td>${stu.course}</td>
+                </tr>
+            </table>
+
+            <table style="margin-top:10px;">
+                <tr>
+                    <th>NAME OF THE CANDIDATE</th>
+                    <th>SEX</th>
+                    <th>REGISTER NO</th>
+                    <th>DOB</th>
+                </tr>
+                <tr>
+                    <td>${stu.name}</td>
+                    <td>${stu.gender}</td>
+                    <td>${r}</td>
+                    <td>${stu.dob}</td>
+                </tr>
+            </table>
+
+
+            <!-- SUBJECT BOX -->
+            <div style="
+                border:2px solid #000;
+                padding:12px;
+                margin-top:20px;
+                border-radius:6px;
+                background:#f7f7f7;
+            ">
+                <h4 style="margin:0 0 10px 0;">SUBJECTS & DETAILS</h4>
+
+                <p style="margin:0 0 10px 0;font-size:13px;">
+                    Subject codes the candidate is appearing for:
+                    <br><b>100L1A 100L1Z 120B1A 120C11 120C1A 120E10 120S1A</b>
+                </p>
+
+                <table>
+                    <tr>
+                        <th>CODE</th><th>SUBJECT</th><th>DATE</th><th>TIME</th><th>SESSION</th>
+                    </tr>
+
+                    <tr><td>100L1A</td><td>Tamil Ilakkiya Varalaru</td><td>22/11/2025</td><td>10 AM - 1 PM</td><td>FN</td></tr>
+                    <tr><td>100L1Z</td><td>General English - 1</td><td>24/11/2025</td><td>10 AM - 1 PM</td><td>FN</td></tr>
+                    <tr><td>120C1A</td><td>Python Programming</td><td>05/12/2025</td><td>10 AM - 1 PM</td><td>FN</td></tr>
+                    <tr><td>120E1C</td><td>Financial Accounting - 1</td><td>12/12/2025</td><td>10 AM - 1 PM</td><td>FN</td></tr>
+                </table>
+
+                <p style="margin-top:10px;font-size:12px;">
+                    <b>Disclaimer:</b> This timetable is included as provided by the candidate.
+                    Please verify with the University for confirmation.
+                </p>
+            </div>
+
+
+            <!-- INSTRUCTIONS BOX -->
+            <div style="
+                border:2px solid #000;
+                padding:15px;
+                margin-top:20px;
+                border-radius:6px;
+                background:#fff;
+                font-size:13px;
+                line-height:1.5;
+            ">
+                <b>INSTRUCTIONS TO CANDIDATES:</b><br><br>
+
+                1.If any corrections need to be made in the Hall Ticket it must be brought to the notice of the Controller of Examinations immediately. 2. Hall Ticket should be preserved until he/she completes the whole examination and on demand it should be produced along with his/her identity Card on each and every session of the Examination. 3. The Register Number should be written legibly in the Answer Book at the appropriate box. provided, failing which his/her results will not be released. 4. No candidates will be allowed to carry incriminating materials inside the Examination Hall.5. Candidates are expected to be in their seats ats 10 minutes before in the Examination Hall 6. Candidates are advised to check whether he/she has been supplied the correct question paper. If not, it is the duty of the candidate to call for correct question paper from the Chief Superintendent of the Examinations. 7.NO CANDIDATE WILL BE ALLOWED TO WRITE THE EXAMINATION WITHOUT THE IDENTITY CARD ISSUED BY THE COLLEGE. 8. Candidates who have not earned necessary attendance for the required courses are not eligible to write the examination 9. Practical Examination will be conducted at the respective Colleges. 10. Possession of Mobile Phone,i-POD, Hand Written materials, Printed or Xerox materials, and also written text on palms, written materials found in Calculator, Kerchief, etc., caught hold of from the candidate in the Examination hall shall be considered as malpractice and will be punished severely as per the law
+
+                <b>Dr. C. Arulvasu, Ph.D.</b>
+            </div>
+
+            <div style="margin-top:20px;display:flex;justify-content:space-between;">
+                <b>Principal Signature</b>
+                <b>Controller of Examinations</b>
+            </div>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("output").innerHTML = out;
+}
+</script>
+
+</body>
+</html>
