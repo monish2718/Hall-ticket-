@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Login - UNOM</title>
+<style>
+    body {
+        background: #e9edf5;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .login-box {
+        background: white;
+        padding: 60px;
+        width: 400px;
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .login-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #003366;
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+    }
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #003366;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: red;
+    }
+</style>
+</head>
+<body>
+  
+<div class="login-box">
+    <h2>St.Georges Arts & Science College</h2>
+
+    <input type="text" id="user" placeholder="Admin Username">
+    <input type="password" id="pass" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login() {
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+
+    if (u === "1727" && p === "0")  {
+        window.location.href = "college1.html";
+    } else {
+        alert("Invalid credentials!");
+    }
+}
+</script>
+
+</body>
+</html>

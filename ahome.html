@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UMIS Database System</title>
+<style>
+body{font-family:Arial;background:#f3f3f3;padding:20px;}
+.container{background:#fff;padding:20px;border-radius:10px;max-width:1100px;margin:auto;box-shadow:0 0 10px #ccc;}
+input,select,textarea{width:100%;padding:8px;margin:5px 0 15px 0;border:1px solid #ccc;border-radius:5px;}
+button{padding:10px 20px;border:none;border-radius:5px;background:#007bff;color:white;cursor:pointer;margin:10px 0;}
+h3{background:#222;color:white;padding:10px;border-radius:4px;}
+table{border-collapse:collapse;width:100%;margin-top:25px;}
+th,td{border:1px solid #333;padding:6px;font-size:13px;}
+.pdfBtn{background:green;color:white;padding:6px 10px;border-radius:4px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2><b>UMIS – STUDENT ENTRY SYSTEM</b></h2>
+
+<form id="studentForm">
+
+<h3>General Information</h3>
+<input id="emis" placeholder="EMIS Number">
+<input id="sname1" placeholder="Student Name (Certificate)">
+<input id="sname2" placeholder="Student Name (Aadhaar)">
+<input type="date" id="dob">
+
+<select id="gender"><option>Gender</option><option>Male</option><option>Female</option><option>Other</option></select>
+<select id="blood"><option>Blood Group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
+<select id="nationality"><option>Nationality</option><option>Indian</option><option>Other</option></select>
+<select id="religion"><option>Religion</option><option>Hindu</option><option>Christian</option><option>Muslim</option><option>Other</option></select>
+<select id="community"><option>Community</option><option>OC</option><option>BC</option><option>MBC</option><option>SC</option><option>ST</option></select>
+
+<input id="ccno" placeholder="Community Certificate No">
+<input id="aadhaar" placeholder="Aadhaar Number">
+
+<select id="fg"><option>First Graduate?</option><option>Yes</option><option>No</option></select>
+
+
+<h3>Contact Information</h3>
+
+<input id="mobile" placeholder="Mobile Number">
+<input id="email" placeholder="Email">
+<textarea id="paddress" placeholder="Permanent Address"></textarea>
+
+<select id="district" onchange="loadTaluks()">
+<option value="">District</option>
+<option>Chennai</option><option>Coimbatore</option><option>Madurai</option>
+<option>Salem</option><option>Dindigul</option><option>Erode</option>
+<option>Namakkal</option><option>Virudhunagar</option>
+</select>
+
+<select id="taluk"><option value="">Taluk</option></select>
+
+<input id="village" placeholder="Village / Town">
+<input id="pincode" placeholder="Pincode">
+
+
+<h3>Family Information</h3>
+<input id="fname" placeholder="Father Name">
+<input id="focc" placeholder="Father Occupation">
+<input id="mname" placeholder="Mother Name">
+<input id="mocc" placeholder="Mother Occupation">
+
+
+<h3>Bank Information</h3>
+<input id="accno" placeholder="Account Number">
+<input id="ifsc" placeholder="IFSC Code">
+<input id="bn" placeholder="Bank Name">
+<input id="branch" placeholder="Branch">
+<input id="acctype" placeholder="Account Type">
+
+
+<h3>College Information</h3>
+<select id="course"><option>Course</option><option>B.Sc CS</option><option>BCA</option><option>B.Com</option><option>BBA</option><option>MBA</option></select>
+<input id="roll" placeholder="Roll Number">
+
+<select id="year">
+<option>Academic Year</option>
+<option>2022-2023</option><option>2023-2024</option><option>2024-2025</option>
+</select>
+
+<input id="batch" placeholder="Batch">
+<input type="date" id="doj">
+<input id="umis" placeholder="UMIS Number">
+
+
+<button type="button" onclick="saveStudent()">Save & Continue</button>
+
+</form>
+
+
+<h2>All Students (Full Details)</h2>
+
+<table id="studentsTable">
+<thead id="tableHead"></thead>
+<tbody id="tableBody"></tbody>
+</table>
+
+</div>
+
+
+<script>
+// 🔥 Tamil Nadu Taluks
+const taluks = {
+"Chennai":["Alandur","Guindy","Velachery","Teynampet"],
+"Coimbatore":["North","South","Pollachi","Sulur"],
+"Madurai":["East","West","Thiruparankundram"],
+"Salem":["Attur","Omalur","Yercaud"],
+"Dindigul":["Palani","Oddanchatram","Kodaikanal"],
+"Erode":["Bhavani","Gobi","Sathy"],
+"Namakkal":["Rasipuram","Tiruchengode"],
+"Virudhunagar":["Sattur","Rajapalayam"]
+};
+
+function loadTaluks(){
+ let d = district.value;
+ taluk.innerHTML = "<option value=''>Taluk</option>";
+ if(taluks[d]){
+  taluks[d].forEach(t => { taluk.innerHTML += `<option>${t}</option>`; });
+ }
+}
+
+
+// 🔥 Save & Continue
+function saveStudent(){
+
+ let s = {
+  emis:emis.value,sname1:sname1.value,sname2:sname2.value,dob:dob.value,
+  gender:gender.value,blood:blood.value,nationality:nationality.value,
+  religion:religion.value,community:community.value,ccno:ccno.value,
+  aadhaar:aadhaar.value,fg:fg.value,mobile:mobile.value,email:email.value,
+  paddress:paddress.value,district:district.value,taluk:taluk.value,
+  village:village.value,pincode:pincode.value,fname:fname.value,
+  focc:focc.value,mname:mname.value,mocc:mocc.value,
+  accno:accno.value,ifsc:ifsc.value,bn:bn.value,branch:branch.value,
+  acctype:acctype.value,course:course.value,roll:roll.value,
+  year:year.value,batch:batch.value,doj:doj.value,umis:umis.value
+ };
+
+ let all = JSON.parse(localStorage.getItem("students") || "[]");
+ all.push(s);
+ localStorage.setItem("students",JSON.stringify(all));
+
+ loadStudents();
+ studentForm.reset();
+ alert("Saved Successfully! Click PDF in the table.");
+}
+
+
+// 🔥 Load Students Table
+function loadStudents(){
+ let all = JSON.parse(localStorage.getItem("students") || "[]");
+ if(all.length===0) return;
+
+ let headers = Object.keys(all[0]);
+ tableHead.innerHTML = "<tr>" + headers.map(h=>`<th>${h}</th>`).join("") + "<th>PDF</th></tr>";
+
+ let body = "";
+ all.forEach((s,i)=>{
+  body += "<tr>";
+  headers.forEach(h=>{ body += `<td>${s[h]}</td>`; });
+  body += `<td><button class='pdfBtn' onclick='generatePDF(${i})'>PDF</button></td>`;
+  body += "</tr>";
+ });
+
+ tableBody.innerHTML = body;
+}
+
+
+// 🔥 Generate PDF
+function generatePDF(i){
+ let s = JSON.parse(localStorage.getItem("students"))[i];
+
+ let w = window.open("");
+
+ w.document.write(`
+ <html>
+ <head>
+ <title>UMIS PDF</title>
+ <style>
+ body{font-family:Arial;padding:20px;}
+ table{border-collapse:collapse;width:100%;}
+ td,th{border:1px solid black;padding:6px;}
+ h2{text-align:center;margin-bottom:20px;}
+ </style>
+ </head>
+
+ <body>
+
+ <h2>UNIFIED STUDENT INFORMATION SYSTEM (UMIS)</h2>
+
+ <table>
+ <tr><th>EMIS Number</th><td>${s.emis}</td></tr>
+ <tr><th>Name (Certificate)</th><td>${s.sname1}</td></tr>
+ <tr><th>Name (Aadhaar)</th><td>${s.sname2}</td></tr>
+ <tr><th>DOB</th><td>${s.dob}</td></tr>
+ <tr><th>Gender</th><td>${s.gender}</td></tr>
+ <tr><th>Blood Group</th><td>${s.blood}</td></tr>
+ <tr><th>Nationality</th><td>${s.nationality}</td></tr>
+ <tr><th>Religion</th><td>${s.religion}</td></tr>
+ <tr><th>Community</th><td>${s.community}</td></tr>
+ <tr><th>Community Certificate No</th><td>${s.ccno}</td></tr>
+ <tr><th>Aadhaar</th><td>${s.aadhaar}</td></tr>
+ <tr><th>First Graduate</th><td>${s.fg}</td></tr>
+ <tr><th>Mobile</th><td>${s.mobile}</td></tr>
+ <tr><th>Email</th><td>${s.email}</td></tr>
+ <tr><th>Permanent Address</th><td>${s.paddress}</td></tr>
+ <tr><th>District</th><td>${s.district}</td></tr>
+ <tr><th>Taluk</th><td>${s.taluk}</td></tr>
+ <tr><th>Village</th><td>${s.village}</td></tr>
+ <tr><th>Pincode</th><td>${s.pincode}</td></tr>
+ <tr><th>Father Name</th><td>${s.fname}</td></tr>
+ <tr><th>Father Occupation</th><td>${s.focc}</td></tr>
+ <tr><th>Mother Name</th><td>${s.mname}</td></tr>
+ <tr><th>Mother Occupation</th><td>${s.mocc}</td></tr>
+ <tr><th>Account Number</th><td>${s.accno}</td></tr>
+ <tr><th>IFSC</th><td>${s.ifsc}</td></tr>
+ <tr><th>Bank Name</th><td>${s.bn}</td></tr>
+ <tr><th>Branch</th><td>${s.branch}</td></tr>
+ <tr><th>Account Type</th><td>${s.acctype}</td></tr>
+ <tr><th>Course</th><td>${s.course}</td></tr>
+ <tr><th>Roll Number</th><td>${s.roll}</td></tr>
+ <tr><th>Academic Year</th><td>${s.year}</td></tr>
+ <tr><th>Batch</th><td>${s.batch}</td></tr>
+ <tr><th>Date of Joining</th><td>${s.doj}</td></tr>
+ <tr><th>UMIS Number</th><td>${s.umis}</td></tr>
+ </table>
+
+ </body></html>
+ `);
+
+ w.document.close();
+ w.print();
+}
+
+loadStudents();
+</script>
+
+</body>
+</html>
