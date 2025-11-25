@@ -1,0 +1,520 @@
+<!--<center>
+<link rel="stylesheet" href="college2.css"> 
+<nav class="navbar">
+    <a href="#" class="logo"> UNIVERSITY </a>
+    
+    <button class="hamburger" aria-expanded="false" aria-controls="nav-links">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    
+    <ul class="nav-links" id="nav-links" data-visible="false">
+        <li><a href="college1.html">Home</a></li>
+        <li><a href=".html">ERS</a></li>
+        <li><a href="#student-list">EXAMINATION</a></li>
+        <li><a href="#reports">RESUIT</a></li>
+        <li><a href="#settings">AFFILATED COLLAGE</a></li>
+      
+    </ul>
+  
+</nav>
+<center>
+<div class="hero">
+        <h1 style="color:blue;">Welcome to Our University</h1>
+    </div></center>
+
+-->
+
+<head>
+    <br>
+<style>
+/* Navbar base */
+nav {
+  background: #222;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: red;
+  font-family: Arial;
+}
+
+/* Hamburger icon */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger div {
+  width: 30px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
+/* Menu items */
+.menu {
+  display: none;
+  flex-direction: column;
+  background: #333;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.menu a {
+  color: red;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid #444;
+}
+
+.menu a:last-child {
+  border-bottom: none;
+}
+
+/* Show menu when active */
+.menu.active {
+  display: flex;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h2 style="COLOR:RED;">ST.Georges Arts & Science College</h2>
+
+  <!-- Hamburger Icon -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+
+<!-- Dropdown Menu -->
+<div class="menu" id="menu">
+  <a href="#">Home</a>
+  <a href="index2.html">Hall ticket BCA</a>
+  <a href="ahome.html">umis</a>
+  <a href="c.html">hall ticket other</a>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("active");
+}
+</script>   
+</style>
+    <center>
+        <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f4f8;
+        padding: 40px;
+    }
+
+    .about-box {
+        max-width: 900px;
+        background: white;
+        padding: 40px;
+        margin: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        text-align: center;
+        color: #002147;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 17px;
+        line-height: 1.8;
+        color: #333;
+        text-align: justify;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #002147;
+    }
+
+    .mission-vision {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: #e6ecff;
+        padding: 20px;
+        border-left: 5px solid #002147;
+        border-radius: 10px;
+    }
+
+    .card h3 {
+        margin-top: 0;
+        color: #002147;
+    }
+
+</style>
+</head>
+<body>
+    <br><br>
+<div class="about-box">
+    <h2>About Our University</h2>
+
+    <p>
+        Our university stands as a beacon of <span class="highlight">academic excellence, heritage, and innovation</span>. 
+        Founded with the mission to empower students with quality education, modern skills, and timeless values, 
+        we have grown into one of the most trusted institutions in the nation.
+    </p>
+
+    <p>
+        With highly qualified faculty, state-of-the-art infrastructure, and a student-first approach, 
+        we ensure every learner is equipped for a successful future.  
+        Our programs are designed to meet industry standards while preserving the discipline and integrity 
+        that define traditional education.
+    </p>
+
+    <div class="mission-vision">
+        <div class="card">
+            <h3>Our Mission</h3>
+            <p>
+                To deliver quality education, nurture character, and produce skilled graduates who 
+                contribute positively to society and industry.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Our Vision</h3>
+            <p>
+                To become a world-class institution recognized for innovation, research, 
+                and values-driven education.
+            </p>
+        </div>
+    </div>
+
+</div>
+    <br> <br>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+    }
+
+    .notice-board {
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .notice-board h2 {
+        margin: 0 0 15px 0;
+        color: #002147;
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .notices {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .notices ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        animation: scrollUp 10s linear infinite;
+    }
+
+    .notices li {
+        background: #e9f0ff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-left: 4px solid #002147;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .notices:hover ul {
+        animation-play-state: paused;
+    }
+
+    @keyframes scrollUp {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-100%); }
+    }
+</style>
+</head>
+<body>
+
+<div class="notice-board">
+    <h2>Notice Board</h2>
+    <div class="notices">
+        <ul>
+            <li>1 years exam time table 2025</li>
+            <li>2,3 years exams started today</li>
+            <li>100 student adsent for university exam</li>
+            <li>BCA Admission open </li>
+            <li>Result pages open 2025-2026</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    console.log("Notice Board Loaded Successfully");
+</script> <br>
+    </center>  
+<style>
+    body {
+        margin: 0;
+        padding: 30px;
+        background: #f4f4f8;
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        color: #002147;
+        margin-bottom: 25px;
+    }
+
+    .gallery-container {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.05);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+</style>
+</head>
+<body>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f4f8;
+        padding: 40px;
+    }
+
+    .about-box {
+        max-width: 900px;
+        background: white;
+        padding: 40px;
+        margin: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        text-align: center;
+        color: #002147;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 17px;
+        line-height: 1.8;
+        color: #333;
+        text-align: justify;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #002147;
+    }
+
+    .mission-vision {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: #e6ecff;
+        padding: 20px;
+        border-left: 5px solid #002147;
+        border-radius: 10px;
+    }
+
+    .card h3 {
+        margin-top: 0;
+        color: #002147;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="about-box">
+    <h2>Pricipal Message</h2>
+
+    <p>
+        <!---Our university stands as a beacon of <span class="highlight">academic excellence, heritage, and innovation</span>. 
+        Founded with the mission to empower students with quality education, modern skills, and timeless values, 
+        we have grown into one of the most trusted institutions in the nation.
+    </p>
+
+    <p>
+        With highly qualified faculty, state-of-the-art infrastructure, and a student-first approach, 
+        we ensure every learner is equipped for a successful future.  
+        Our programs are designed to meet industry standards while preserving the discipline and integrity 
+        that define traditional education.-->
+    </p>
+
+    <div class="mission-vision">
+        <div class="card">
+            <h3>Our Mission</h3>
+            <p>
+                To deliver quality education, nurture character, and produce skilled graduates who 
+                contribute positively to society and industry.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>University Vision</h3>
+            <p>
+                To become a world-class institution recognized for innovation, research, 
+                and values-driven education.
+            </p>
+        </div>
+    </div>
+
+<h2>Campus Photo Gallery</h2>
+
+<div class="gallery-container">
+    <div class="gallery-item">
+        <img src="#" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="">
+    </div>
+</div>
+    <br>
+  <br>
+    <style>
+footer {
+  background: #222;
+  color: #ddd;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-family: Arial;
+}
+
+footer div {
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+footer h3 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+footer a {
+  color: #bbb;
+  text-decoration: none;
+  display: block;
+  margin: 6px 0;
+}
+
+footer a:hover {
+  color: #0ff;
+}
+
+footer .social a {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
+}
+</style>
+
+<footer>
+  <div>
+    <h3>st.georges art & scienes college</h3>
+    <p style="color:white;">Designing the web with passion and precision.</p>
+  </div>
+
+  <div>
+    <h3>Quick Links</h3>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <div>
+    <h3 style="color:white;">Contact Info</h3>
+    <p style="color:white;">Email: stgeoges@gmail.com</p>
+    <p style="color:white;">Phone: +91 98765 43210</p>
+    <p style="color:white;">Chennai, Tamil Nadu</p>
+  </div>
+
+  <div class="social">
+    <h3>Follow Us</h3>
+    <a href="#">🌐</a>
+    <a href="#">📘</a>
+    <a href="#">📸</a>
+    <a href="#">🐦</a>
+  </div>
+</footer>
+    </style>
+    <script defer src="college3.js"></script>
+</head>
+</center>
